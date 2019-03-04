@@ -22,8 +22,7 @@ class Register extends Api
     //普通手机号密码注册
     public function register()
     {
-        echo time();
-        die();
+
         $data = [
             'name' => $request->nickname,
             'phone' => $request->phone,

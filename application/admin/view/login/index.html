@@ -1,0 +1,152 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban.html -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>后台管理</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png"> -->
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="apple-touch-icon" href="__STATIC__/icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600" rel="stylesheet">
+
+    <link rel="stylesheet" href="__STATIC__/css/style.css">
+    <!--<link rel="stylesheet" href="__STATIC__/css/layui.css">-->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
+    <!--<script src="__STATIC__/js/layui.js"></script>-->
+    <script src="__STATIC__/layer/layer.js"></script>
+</head>
+
+<body>
+<div class="content-body" id="app">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-title">欢迎来到后台管理界面</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="card login-card">
+                        <div class="card-body">
+                            <h2 class="card-title">登 陆</h2>
+                            <form method="POST" action="" id="form-demo">
+                                <div class="form-group">
+                                    <input type="input" required class="form-control m-b-30" v-model="userInfo.username"
+                                           placeholder="用户名">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" required class="form-control m-b-30"
+                                           v-model="userInfo.password"
+                                           placeholder="密码">
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">记住我</label>
+                                    </div>
+                                    <label class="pull-right" for="">
+                                        <a href="#">忘记密码?</a>
+                                    </label>
+                                </div>
+                                <button type="button" class="btn btn-block m-b-30 submit" id="login_btn"
+                                        @click="login()" @keyup.enter="login()">立 即 登
+                                    陆
+                                </button>
+                                <div class="row m-b-25">
+                                    <div class="col-lg-6">
+                                        <button type="button" class="btn btn-block btn-facebook">微 信 登 陆</button>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button type="button" class="btn btn-block btn-twitter">微 博 登 陆</button>
+                                    </div>
+                                </div>
+                                <a href="#" class="register-btn">
+                                    注 册
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="promotion-section">
+                        <h1 class="m-b-50">Buy and sell coins at the cryptopic without additional fees.</h1>
+                        <p class="m-b-50">Proin non tortor pharetra nisi ultricies rhoncus. Quisque posuere ut mi et
+                            viverra. Nunc lorem
+                            odio, aliquam vel ipsum vel, posuere posuere augue. Sed convallis dui ut erat consequat,
+                            in sodales sapien ornare.</p>
+                        <button class="btn btn-success btn-radius">Go to Buy and Sell Cryptocurrency
+                            Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="copyright">&copy; Copyright 2018 by Tortoiz. All Rights Reserved.More Templates <a
+                        href="http://www.scnoob.com">菜鸟素材</a> - Collect from <a
+                        href="http://www.scnoob.com/moban.html">网页模板</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modernizr-3 -->
+<!-- jQuery -->
+<script src="__STATIC__/assets/plugins/common/common.min.js"></script>
+
+
+<!-- custom scripts -->
+<script src="__STATIC__/js/scripts.js"></script>
+
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            userInfo: {
+                username: '',
+                password: ''
+            }
+        },
+        methods: {
+            login() {
+                let url = "{:url('doLogin')}";
+                axios.post(url, this.userInfo)
+                    .then(result => {
+                        if (result.data.code === 200) {
+                            // window.location.href = result.data.msg
+                        } else {
+                            layer.msg(result.data.msg, {icon: 5});
+                        }
+                    }).catch(e => console.log(e))
+            },
+        }
+
+    })
+
+</script>
+</body>
+
+
+</html>

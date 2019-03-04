@@ -14,13 +14,14 @@ use think\Validate;
 class Login extends Validate
 {
     protected $rule = [
-        'phone'      => 'require|mobile',
+        'phone'      => 'require|mobile|number',
         'password'     => 'require|min:6',
     ];
 
     protected $message = [
         'phone.require'     => '手机不能为空',
         'phone.mobile'      => '手机格式错误',
+        'phone.number'      => '手机只能是数字',
         'password.require'  => '密码不能为空',
         'password.min'      => '密码最少6位',
     ];

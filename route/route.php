@@ -15,7 +15,7 @@ Route::get('think', function () {
 
 Route::get('hello/:name', 'index/hello');
 
-////////////////////////////////////////////////////////////////////////////
+/*******************************restfunl api************************************* */
 //一般路由规则，访问的url为：v1/address/1,对应的文件为Address类下的read方法
 Route::get(':version/address/:id','api/:version.user/address');
 
@@ -27,28 +27,26 @@ Route::post(':version/token','api/:version.token/token');
 /////////////////////////////////////////////////////////////////////////////////
 Route::get(':version/register', 'api/:version.register/register');//用户注册
 
+/****************************admin1中整合Oauth2.0*********************************/
+Route::get('oauth/authorize', 'admin1/OAuth/authorize');
+Route::post('oauth/authorize', 'admin1/OAuth/authorize');
 
+Route::get('token', 'admin1/OAuth/token');
+Route::post('token', 'admin1/OAuth/token');
 
-
-Route::get('oauth/authorize', 'admin/OAuth/authorize');
-Route::post('oauth/authorize', 'admin/OAuth/authorize');
-
-Route::get('token', 'admin/OAuth/token');
-Route::post('token', 'admin/OAuth/token');
-
-Route::get('resource', 'admin/OAuth/resource');
-Route::post('resource', 'admin/OAuth/resource');
-
+Route::get('resource', 'admin1/OAuth/resource');
+Route::post('resource', 'admin1/OAuth/resource');
 
 //后台用户管理
-Route::group('admin', function () {
-    Route::get('doRegister', 'admin/login/doRegister');//用户注册
+Route::group('admin1', function () {
+    Route::get('doRegister', 'admin1/login/doRegister');//用户注册
 
-    Route::get('login', 'admin/login/index');
-    Route::get('doLogin', 'admin/login/doLogin');
+    Route::get('login', 'admin1/login/index');
+    Route::get('doLogin', 'admin1/login/doLogin');
 });
 
 
+/*******************************jwt中token接口生成***************************************/
 Route::get('api2/token', 'api2/token/index');//获取token
 //api接口管理，当前方法使用的是jwt加密方式
 Route::get('api2/login', 'api2/login/index');//登陆
@@ -58,9 +56,9 @@ Route::group('api2', function () {
     Route::get('getInfo', 'api2/login/getInfo');//获取用户相关信息：id。username.picture
 })->middleware(['JWTAuth']);
 
+/*************************************后台网站管理************************************/
+Route::group('admin', function () {
+    Route::get('login/login', 'admin/login/index');
+    Route::post('login/doLogin', 'admin/login/doLogin');
+});
 
-Route::get('api2/token', 'api2/token/index');//获取token
-
-return [
-
-];
